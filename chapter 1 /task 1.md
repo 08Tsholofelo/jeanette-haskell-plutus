@@ -1,20 +1,34 @@
--- Define the double function
-double :: Int -> Int
-double x = x * 2
+```haskell
+-- Define the circleArea function
+circleArea :: Floating a => a -> a
+circleArea radius = pi * radius ^ 2
+```
 
--- Define the increment function
-increment :: Int -> Int
-increment x = x + 1
+### Explanation:
 
--- Compose functions: double first, then increment
-doubleThenIncrement :: Int -> Int
-doubleThenIncrement = increment . double
+* The function is **pure**, meaning it depends **only on its input** and has **no side effects**.
+* `Floating a => a -> a` means it works with any floating-point type (`Float`, `Double`, etc.).
+* `pi` is a predefined constant in Haskell representing the mathematical π (pi).
+* `radius ^ 2` squares the radius.
 
--- Main function to test it
+### Example usage:
+
+You can test it in GHCi (Haskell interactive shell):
+
+```haskell
+> circleArea 3
+28.274333882308138
+```
+
+### Full testable version:
+
+```haskell
+circleArea :: Floating a => a -> a
+circleArea radius = pi * radius ^ 2
+
 main :: IO ()
 main = do
-    let input = 5
-    let result = doubleThenIncrement input
-    putStrLn ("Input: " ++ show input)
-    putStrLn ("Result of doubleThenIncrement: " ++ show result)
+    let r = 3.0
+    putStrLn $ "Area of circle with radius " ++ show r ++ " is " ++ show (circleArea r)
+
 
